@@ -18,17 +18,17 @@ tokens = (
 
 # Regular expression rules for simple tokens
 t_GIVES   = r'->'
-t_OR   = r'|'
+t_OR   = r'\|'
 
 # A regular expression rule with some action code
 def t_SYMBOL(t):
-    r'[a-z]+'    
+    r'[a-zA-Z]+'
     return t
 
 # Define a rule so we can track line numbers
 def t_PYCODE(t):
     r'{.*}'
-    t.val = t.val[1:-1]
+    t.value = t.value[1:-1]
     return t
 
 # A string containing ignored characters (spaces and tabs)
@@ -43,3 +43,5 @@ def t_error(t):
 lexer = lex.lex()
 
 lexer.input('A->B|C{print "{Hello World}"}')
+for token in lexer:
+    print(token)
