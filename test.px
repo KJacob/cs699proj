@@ -1,0 +1,11 @@
+program -> statement program {
+print 1
+}
+
+program -> eps {
+	print "Blah"
+}
+
+statement -> expression {
+print 1.value
+}

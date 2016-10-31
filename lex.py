@@ -27,21 +27,21 @@ def t_SYMBOL(t):
 
 # Define a rule so we can track line numbers
 def t_PYCODE(t):
-    r'{.*}'
+    r'{(\n|.)*?}'
     t.value = t.value[1:-1]
     return t
 
 # A string containing ignored characters (spaces and tabs)
-t_ignore  = ' \t'
+t_ignore  = ' \t\n'
 
 # Error handling rule
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    print("Illegal character '%s'" % t.value)
     t.lexer.skip(1)
 
 # Build the lexer
 lexer = lex.lex()
 
-lexer.input('A->B|C{print "{Hello World}"}')
-for token in lexer:
-    print(token)
+#lexer.input('A->B|C{print "{Hello World}"}')
+#for token in lexer:
+#    print(token)

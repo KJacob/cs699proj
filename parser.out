@@ -1,0 +1,196 @@
+Created by PLY version 3.9 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> rules
+Rule 1     rules -> rules rule
+Rule 2     rules -> rule
+Rule 3     rule -> leftsymb GIVES bodies
+Rule 4     bodies -> body OR bodies
+Rule 5     bodies -> body
+Rule 6     body -> terminals PYCODE
+Rule 7     terminals -> terminal terminals
+Rule 8     terminals -> terminal
+Rule 9     leftsymb -> SYMBOL
+Rule 10    terminal -> SYMBOL
+
+Terminals, with rules where they appear
+
+GIVES                : 3
+OR                   : 4
+PYCODE               : 6
+SYMBOL               : 9 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+bodies               : 3 4
+body                 : 4 5
+leftsymb             : 3
+rule                 : 1 2
+rules                : 1 0
+terminal             : 7 8
+terminals            : 6 7
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . rules
+    (1) rules -> . rules rule
+    (2) rules -> . rule
+    (3) rule -> . leftsymb GIVES bodies
+    (9) leftsymb -> . SYMBOL
+
+    SYMBOL          shift and go to state 4
+
+    rule                           shift and go to state 1
+    leftsymb                       shift and go to state 2
+    rules                          shift and go to state 3
+
+state 1
+
+    (2) rules -> rule .
+
+    SYMBOL          reduce using rule 2 (rules -> rule .)
+    $end            reduce using rule 2 (rules -> rule .)
+
+
+state 2
+
+    (3) rule -> leftsymb . GIVES bodies
+
+    GIVES           shift and go to state 5
+
+
+state 3
+
+    (0) S' -> rules .
+    (1) rules -> rules . rule
+    (3) rule -> . leftsymb GIVES bodies
+    (9) leftsymb -> . SYMBOL
+
+    SYMBOL          shift and go to state 4
+
+    rule                           shift and go to state 6
+    leftsymb                       shift and go to state 2
+
+state 4
+
+    (9) leftsymb -> SYMBOL .
+
+    GIVES           reduce using rule 9 (leftsymb -> SYMBOL .)
+
+
+state 5
+
+    (3) rule -> leftsymb GIVES . bodies
+    (4) bodies -> . body OR bodies
+    (5) bodies -> . body
+    (6) body -> . terminals PYCODE
+    (7) terminals -> . terminal terminals
+    (8) terminals -> . terminal
+    (10) terminal -> . SYMBOL
+
+    SYMBOL          shift and go to state 11
+
+    body                           shift and go to state 8
+    terminals                      shift and go to state 9
+    bodies                         shift and go to state 10
+    terminal                       shift and go to state 7
+
+state 6
+
+    (1) rules -> rules rule .
+
+    SYMBOL          reduce using rule 1 (rules -> rules rule .)
+    $end            reduce using rule 1 (rules -> rules rule .)
+
+
+state 7
+
+    (7) terminals -> terminal . terminals
+    (8) terminals -> terminal .
+    (7) terminals -> . terminal terminals
+    (8) terminals -> . terminal
+    (10) terminal -> . SYMBOL
+
+    PYCODE          reduce using rule 8 (terminals -> terminal .)
+    SYMBOL          shift and go to state 11
+
+    terminal                       shift and go to state 7
+    terminals                      shift and go to state 12
+
+state 8
+
+    (4) bodies -> body . OR bodies
+    (5) bodies -> body .
+
+    OR              shift and go to state 13
+    SYMBOL          reduce using rule 5 (bodies -> body .)
+    $end            reduce using rule 5 (bodies -> body .)
+
+
+state 9
+
+    (6) body -> terminals . PYCODE
+
+    PYCODE          shift and go to state 14
+
+
+state 10
+
+    (3) rule -> leftsymb GIVES bodies .
+
+    SYMBOL          reduce using rule 3 (rule -> leftsymb GIVES bodies .)
+    $end            reduce using rule 3 (rule -> leftsymb GIVES bodies .)
+
+
+state 11
+
+    (10) terminal -> SYMBOL .
+
+    SYMBOL          reduce using rule 10 (terminal -> SYMBOL .)
+    PYCODE          reduce using rule 10 (terminal -> SYMBOL .)
+
+
+state 12
+
+    (7) terminals -> terminal terminals .
+
+    PYCODE          reduce using rule 7 (terminals -> terminal terminals .)
+
+
+state 13
+
+    (4) bodies -> body OR . bodies
+    (4) bodies -> . body OR bodies
+    (5) bodies -> . body
+    (6) body -> . terminals PYCODE
+    (7) terminals -> . terminal terminals
+    (8) terminals -> . terminal
+    (10) terminal -> . SYMBOL
+
+    SYMBOL          shift and go to state 11
+
+    terminal                       shift and go to state 7
+    body                           shift and go to state 8
+    terminals                      shift and go to state 9
+    bodies                         shift and go to state 15
+
+state 14
+
+    (6) body -> terminals PYCODE .
+
+    OR              reduce using rule 6 (body -> terminals PYCODE .)
+    SYMBOL          reduce using rule 6 (body -> terminals PYCODE .)
+    $end            reduce using rule 6 (body -> terminals PYCODE .)
+
+
+state 15
+
+    (4) bodies -> body OR bodies .
+
+    SYMBOL          reduce using rule 4 (bodies -> body OR bodies .)
+    $end            reduce using rule 4 (bodies -> body OR bodies .)
+
