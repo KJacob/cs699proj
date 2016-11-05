@@ -2,14 +2,18 @@ import parse
 import sys
 import lex
 
-file_name = sys.argv[1]
+#file_name = sys.argv[1]
+file_name = 'gramm'
+dollar = '$'
+epsilon = 'eps'
 
 with open(file_name, 'r') as fp:
     parse_input = fp.read()
 
 parse.parser.parse(parse_input)
-
-#print (parse.rules_list)
+lex.lexer.input (parse_input)
+print (parse.rules_list)
+tkn = list(lex.lexer) + [dollar, dollar]
 
 #lex.lexer.input (parse_input)
 
@@ -46,6 +50,7 @@ def do_parse(lex_input):
 
 
     while len(rule_stack) > 0:
+        pass
 
 def make_parse_table(rules, tokens):
 
@@ -75,7 +80,7 @@ def make_parse_table(rules, tokens):
 
     for i, rule in enumerate(rules):
         for term in first_dict[rule[0]]:
-            first_alpha = get_body_first(rule[1][0], first_dict, token)
+            first_alpha = get_body_first(rule[1][0], first_dict, tokens)
             for elem in first_alpha:
                 if elem is not epsilon:
                     if elem in parse_table[rule[0]] and parse_table[rule[0]][elem] != i:
@@ -86,10 +91,11 @@ def make_parse_table(rules, tokens):
                         if item in parse_table[rule[0]] and parse_table[rule[0]][item] != i:
                             raise AmbiguousGrammarError
                         parse_table[rule[0]][item] = i
+    return parse_table
 
 
 
-def get_first(symbol, rules, tokens):
+def get_first(symbol, rules, tokens, depth = 0):
     first = set()
     if depth > len(rules):
         raise LeftRecursion
@@ -99,13 +105,15 @@ def get_first(symbol, rules, tokens):
             for non_term in rule[1][0]:
                 if non_term in tokens:
                     temp_set.add(non_term)
-                    temp_set.remove(epsilon)
+                    if epsilon in temp_set:
+                        temp_set.remove(epsilon)
                     break
                 else:
                     temp = get_first(non_term, rules, tokens, depth + 1)
                     if epsilon not in temp:
                         temp_set |= temp
-                        temp_set.remove(epsilon)
+                        if epsilon in temp_set:
+                            temp_set.remove(epsilon)
                         break
         first |= temp_set
     return first
@@ -143,3 +151,14 @@ def get_body_first(body, first_dict, tokens):
             if epsilon not in first_dict[term]:
                 break
     return body_first
+
+tokens = (
+    'PLUS','STAR',
+    'LB','RB',
+    )
+
+
+def test():
+    print (make_parse_table(parse.rules_list, tokens))
+
+test()

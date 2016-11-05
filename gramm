@@ -1,0 +1,12 @@
+
+
+
+S -> E {}
+E -> T Ea {}
+Ea -> PLUS T E {}
+    | LAMB {}
+T -> F Ta {}
+Ta -> STAR F Ta {}
+    | LAMB {}
+F -> LB E RB {}
+    | V {}
