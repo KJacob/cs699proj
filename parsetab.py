@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = '24B6CE2F596B40114CA5C3EE9A850DDF'
+_lr_signature = '8C34D412249559E0784F00079D956792'
     
-_lr_action_items = {'OR':([8,14,],[13,-6,]),'GIVES':([2,4,],[5,-9,]),'SYMBOL':([0,1,3,5,6,7,8,10,11,13,14,15,],[4,-2,4,11,-1,11,-5,-3,-10,11,-6,-4,]),'PYCODE':([7,9,11,12,],[-8,14,-10,-7,]),'$end':([1,3,6,8,10,14,15,],[-2,0,-1,-5,-3,-6,-4,]),}
+_lr_action_items = {'PYCODE':([7,9,10,13,],[12,-10,-8,-7,]),'GIVES':([3,4,],[6,-9,]),'SYMBOL':([0,1,2,5,6,8,9,10,11,12,14,15,],[4,4,-2,-1,9,-3,-10,9,-5,-6,9,-4,]),'$end':([1,2,5,8,11,12,15,],[0,-2,-1,-3,-5,-6,-4,]),'OR':([11,12,],[14,-6,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'rule':([0,3,],[1,6,]),'terminal':([5,7,13,],[7,7,7,]),'leftsymb':([0,3,],[2,2,]),'terminals':([5,7,13,],[9,12,9,]),'bodies':([5,13,],[10,15,]),'body':([5,13,],[8,8,]),'rules':([0,],[3,]),}
+_lr_goto_items = {'rules':([0,],[1,]),'rule':([0,1,],[2,5,]),'leftsymb':([0,1,],[3,3,]),'bodies':([6,14,],[8,15,]),'terminal':([6,10,14,],[10,10,10,]),'body':([6,14,],[11,11,]),'terminals':([6,10,14,],[7,13,7,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -28,12 +28,12 @@ _lr_productions = [
   ("S' -> rules","S'",1,None,None,None),
   ('rules -> rules rule','rules',2,'p_rules','parse.py',11),
   ('rules -> rule','rules',1,'p_rules','parse.py',12),
-  ('rule -> leftsymb GIVES bodies','rule',3,'p_rule','parse.py',16),
-  ('bodies -> body OR bodies','bodies',3,'p_bodies','parse.py',20),
-  ('bodies -> body','bodies',1,'p_bodies','parse.py',21),
-  ('body -> terminals PYCODE','body',2,'p_body','parse.py',28),
-  ('terminals -> terminal terminals','terminals',2,'p_terminals','parse.py',32),
-  ('terminals -> terminal','terminals',1,'p_terminals','parse.py',33),
-  ('leftsymb -> SYMBOL','leftsymb',1,'p_leftsymb','parse.py',40),
-  ('terminal -> SYMBOL','terminal',1,'p_terminal','parse.py',44),
+  ('rule -> leftsymb GIVES bodies','rule',3,'p_rule','parse.py',21),
+  ('bodies -> body OR bodies','bodies',3,'p_bodies','parse.py',25),
+  ('bodies -> body','bodies',1,'p_bodies','parse.py',26),
+  ('body -> terminals PYCODE','body',2,'p_body','parse.py',33),
+  ('terminals -> terminal terminals','terminals',2,'p_terminals','parse.py',37),
+  ('terminals -> terminal','terminals',1,'p_terminals','parse.py',38),
+  ('leftsymb -> SYMBOL','leftsymb',1,'p_leftsymb','parse.py',45),
+  ('terminal -> SYMBOL','terminal',1,'p_terminal','parse.py',49),
 ]

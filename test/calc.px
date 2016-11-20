@@ -1,0 +1,11 @@
+pgm -> stmtlist{0}
+stmtlist -> stmt stmtlist {1} | EPS{2}
+stmt -> expr {3}
+expr -> term termtail{4}
+termtail -> addop term termtail {5} | EPS{6}
+term -> factor factortail{7}
+factortail -> multop factor factortail {8} | EPS{9}
+factor -> LEFTBR expr RIGHTBR {10} | ID {11} | LITERAL{12}
+addop -> PLUS {13} | MINUS{14}
+multop -> MULT {15} | DIVIDE{16}
+
